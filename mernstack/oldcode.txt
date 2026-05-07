@@ -7,36 +7,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff4655; /* Valorant Red */
+            --primary: #ff4655; 
             --primary-glow: rgba(255, 70, 85, 0.5);
             --bg: #0f172a;
             --card-bg: rgba(30, 41, 59, 0.7);
             --text: #f8fafc;
             --text-dim: #94a3b8;
-            --glass: rgba(255, 255, 255, 0.03);
+            --glass: rgba(255, 255, 255, 0.05);
+            --nav-bg: rgba(15, 23, 42, 0.95);
         }
 
-        /* Smooth Scroll Behavior */
-        html {
-            scroll-behavior: smooth;
+        [data-theme="light"] {
+            --bg: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text: #0f172a;
+            --text-dim: #475569;
+            --glass: rgba(0, 0, 0, 0.05);
+            --nav-bg: rgba(241, 245, 249, 0.95);
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
-            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
             color: var(--text);
             margin: 0;
-            padding: 0;
             line-height: 1.6;
+            transition: all 0.4s ease;
         }
 
-        /* Sticky Navigation Bar */
+        /* --- NAVIGATION --- */
         nav {
             position: sticky;
             top: 0;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
             padding: 15px 0;
             z-index: 1000;
             border-bottom: 1px solid var(--glass);
@@ -48,253 +54,129 @@
             text-decoration: none;
             margin: 0 15px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: 0.3s;
         }
 
-        nav a:hover {
-            color: var(--primary);
+        nav a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
+
+        .theme-toggle {
+            cursor: pointer;
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-left: 20px;
+            transition: 0.3s;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-            animation: fadeIn 1.2s ease-out;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        h1 {
+        /* --- HERO --- */
+        header { text-align: center; margin-bottom: 80px; }
+        .hero-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            text-transform: uppercase;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--primary);
             letter-spacing: 5px;
-            color: var(--primary);
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px var(--primary-glow);
+            text-shadow: 0 0 25px var(--primary-glow);
         }
 
-        h2 {
-            font-family: 'Orbitron', sans-serif;
-            border-left: 5px solid var(--primary);
-            padding-left: 15px;
-            margin-top: 60px;
-            letter-spacing: 2px;
-        }
-
-        /* Profile Interaction */
+        /* --- PROFILE SECTION --- */
         .profile-section {
             display: flex;
-            gap: 40px;
-            align-items: center;
-            flex-wrap: wrap;
+            gap: 50px;
             background: var(--card-bg);
-            padding: 40px;
-            border-radius: 24px;
+            padding: 50px;
+            border-radius: 30px;
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass);
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .profile-img img {
-            width: 250px;
-            height: 280px;
+            width: 280px;
+            height: 320px;
             object-fit: cover;
             border-radius: 20px;
             border: 2px solid var(--primary);
-            transition: all 0.5s ease;
-            filter: grayscale(30%);
+            transition: 0.5s;
         }
 
         .profile-img img:hover {
-            filter: grayscale(0%);
             transform: scale(1.05) rotate(2deg);
             box-shadow: 0 0 30px var(--primary-glow);
         }
 
-        /* Skill Progress Bars */
-        .skill-container {
-            margin-top: 20px;
-        }
-        .skill-bar {
-            background: #334155;
-            height: 8px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-        .skill-per {
-            background: var(--primary);
-            height: 100%;
-            border-radius: 10px;
-            transition: 1.5s ease-out;
-        }
+        .about-text ul { list-style: none; padding: 0; }
+        .about-text li { margin-bottom: 10px; font-size: 1.1rem; }
+        .about-text b { color: var(--primary); }
 
-        /* Social Links as Buttons */
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-        }
+        /* --- SKILLS --- */
+        .skill-bar { background: var(--glass); height: 10px; border-radius: 10px; margin: 10px 0 20px; overflow: hidden; }
+        .skill-per { background: var(--primary); height: 100%; width: 0; transition: 2s ease-in-out; }
 
+        /* --- SOCIAL LINKS --- */
+        .social-links { display: flex; gap: 15px; margin-top: 25px; }
         .social-links a {
             color: var(--text);
             text-decoration: none;
             border: 1px solid var(--primary);
             padding: 10px 20px;
             border-radius: 50px;
-            font-size: 0.8rem;
             font-weight: bold;
             transition: 0.4s;
         }
+        .social-links a:hover { background: var(--primary); color: white; box-shadow: 0 0 15px var(--primary-glow); }
 
-        .social-links a:hover {
-            background: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
+        /* --- EDUCATION TABLE --- */
+        .table-container { overflow-x: auto; border-radius: 15px; background: var(--glass); padding: 20px; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 15px; border-bottom: 1px solid var(--glass); }
+        th { color: var(--primary); font-family: 'Orbitron'; }
 
-        /* Table Styling */
-        .table-container {
-            overflow-x: auto;
-            border-radius: 12px;
-            background: var(--glass);
-        }
+        /* --- PROJECT GRID --- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px; }
+        .project-card { background: var(--glass); padding: 30px; border-radius: 20px; border: 1px solid var(--glass); transition: 0.4s; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); background: var(--card-bg); }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 20px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        th {
-            background: rgba(255, 70, 85, 0.1);
-            color: var(--primary);
-        }
-
-        /* Animated Project Cards */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .project-item {
-            background: var(--glass);
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s;
-            cursor: default;
-        }
-
-        .project-item:hover {
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-10px);
-            border-color: var(--primary);
-        }
-
-        .project-item b {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-
-        /* Contact Form Modernization */
-        .contact-form {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--glass);
-        }
-
+        /* --- CONTACT --- */
+        .contact-box { background: var(--card-bg); padding: 40px; border-radius: 25px; border: 1px solid var(--glass); }
         input, textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid #334155;
-            color: white;
-            border-radius: 10px;
-            margin-top: 8px;
-            transition: 0.3s;
+            width: 100%; padding: 15px; margin-bottom: 15px; background: var(--bg);
+            border: 1px solid var(--glass); color: var(--text); border-radius: 10px; box-sizing: border-box;
         }
 
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: #0f172a;
-        }
-
-        button {
-            background: linear-gradient(45deg, var(--primary), #ff7e88);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 20px;
-            transition: 0.4s;
-        }
-
-        button:hover {
-            letter-spacing: 4px;
-            box-shadow: 0 10px 20px var(--primary-glow);
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px 0;
-            color: var(--text-dim);
-            border-top: 1px solid var(--glass);
-        }
-
-        /* Mobile Responsive adjustments */
-        @media (max-width: 768px) {
-            .profile-section { flex-direction: column; text-align: center; }
-            .form-row { flex-direction: column; gap: 0; }
-            h1 { font-size: 2rem; }
-        }
+        @media (max-width: 768px) { .profile-section { flex-direction: column; text-align: center; } .social-links { justify-content: center; } }
     </style>
 </head>
-<body>
+<body onload="animateSkills()">
 
 <nav>
     <a href="#about">About</a>
     <a href="#education">Education</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
 </nav>
 
 <div class="container">
     <header>
-        <h1>Ritesh Kumar</h1>
-        <p style="color: var(--primary); font-weight: bold; letter-spacing: 2px;">FULL STACK DEVELOPER • ESPORTS ATHLETE</p>
+        <h1 class="hero-title">Ritesh Kumar</h1>
+        <p style="letter-spacing: 3px; font-weight: bold; color: var(--primary);">FULL STACK DEVELOPER • ESPORTS ATHLETE</p>
     </header>
 
-    <div class="profile-section" id="about">
+    <section id="about" class="profile-section">
         <div class="profile-img">
             <img src="Profile.jpeg" alt="Ritesh Kumar">
         </div>
         <div class="about-text">
-            <h2>About Me</h2>
+            <h2 style="font-family: 'Orbitron';">About Me</h2>
             <ul>
                 <li><b>NAME:</b> Ritesh Kumar</li>
                 <li><b>AGE:</b> 22 Years</li>
@@ -302,12 +184,10 @@
                 <li><b>SKILLS:</b> JavaScript, React, Node.js</li>
             </ul>
             
-            <div class="skill-container">
-                <small>Frontend Development</small>
-                <div class="skill-bar"><div class="skill-per" style="width: 90%;"></div></div>
-                <small>Backend (Node.js)</small>
-                <div class="skill-bar"><div class="skill-per" style="width: 75%;"></div></div>
-            </div>
+            <small>Frontend Development</small>
+            <div class="skill-bar"><div class="skill-per" id="skill1" data-width="90%"></div></div>
+            <small>Backend (Node.js)</small>
+            <div class="skill-bar"><div class="skill-per" id="skill2" data-width="75%"></div></div>
 
             <div class="social-links">
                 <a href="https://www.instagram.com/ritesh_sharma026/" target="_blank">Instagram</a>
@@ -315,83 +195,71 @@
                 <a href="https://github.com/riteshkr26" target="_blank">GitHub</a>
             </div>
         </div>
-    </div>
+    </section>
 
     <section id="education">
-        <h2>Education</h2>
+        <h2 style="font-family: 'Orbitron'; margin-top: 80px;">Education</h2>
         <div class="table-container">
             <table>
                 <thead>
-                    <tr>
-                        <th>Degree</th>
-                        <th>Institution</th>
-                        <th>Year</th>
-                    </tr>
+                    <tr><th>Degree</th><th>Institution</th><th>Year</th></tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Matriculation</td>
-                        <td>D.B PUBLIC SCHOOL ARA</td>
-                        <td>2019</td>
-                    </tr>
-                    <tr>
-                        <td>Intermediate</td>
-                        <td>S.B College Ara</td>
-                        <td>2021</td>
-                    </tr>
-                    <tr>
-                        <td>BCA</td>
-                        <td>Amity University Patna</td>
-                        <td>2022-2025</td>
-                    </tr>
+                    <tr><td>Matriculation</td><td>D.B PUBLIC SCHOOL ARA</td><td>2019</td></tr>
+                    <tr><td>Intermediate</td><td>S.B College Ara</td><td>2021</td></tr>
+                    <tr><td>BCA</td><td>Amity University Patna</td><td>2022-2025</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
     <section id="projects">
-        <h2>Featured Projects</h2>
+        <h2 style="font-family: 'Orbitron'; margin-top: 80px;">Featured Projects</h2>
         <div class="project-grid">
-            <div class="project-item">
-                <b>Adventure Car Racing</b>
-                <p>A high-octane racing experience built using the Unity Engine with advanced physics and mechanics.</p>
+            <div class="project-card">
+                <b style="color: var(--primary); font-size: 1.2rem;">Adventure Car Racing</b>
+                <p>Unity Engine high-octane racing experience with advanced physics.</p>
             </div>
-            <div class="project-item">
-                <b>Game Server UI</b>
-                <p>A sleek, dark-themed dashboard designed for managing high-performance game servers with ease.</p>
+            <div class="project-card">
+                <b style="color: var(--primary); font-size: 1.2rem;">Game Server UI</b>
+                <p>Sleek dashboard for managing high-performance game servers.</p>
             </div>
-            <div class="project-item">
-                <b>Speaking Dictionary</b>
-                <p>An Android application using Java and XML that helps users with pronunciation and definitions.</p>
+            <div class="project-card">
+                <b style="color: var(--primary); font-size: 1.2rem;">Speaking Dictionary</b>
+                <p>Android app using Java & XML for pronunciation and definitions.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <h2>Send Your Query</h2>
-        <div class="contact-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" placeholder="Enter your name">
-                </div>
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="Enter your email">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Message</label>
-                <textarea rows="5" placeholder="How can we collaborate?"></textarea>
-            </div>
-            <button type="submit">Send Message</button>
+    <section id="contact" style="margin-top: 80px;">
+        <h2 style="font-family: 'Orbitron';">Send Your Query</h2>
+        <div class="contact-box">
+            <input type="text" placeholder="Enter your name">
+            <input type="email" placeholder="Enter your email">
+            <textarea rows="5" placeholder="How can we collaborate?"></textarea>
+            <button class="theme-toggle" style="width: 100%; padding: 15px; margin: 0;">SEND MESSAGE</button>
         </div>
     </section>
 
-    <footer>
-        <p>© 2026 Ritesh Kumar | Built with Passion</p>
+    <footer style="text-align: center; padding: 60px 0; opacity: 0.7;">
+        <p>© <span id="year"></span> Ritesh Kumar | Built with Passion</p>
     </footer>
 </div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function toggleTheme() {
+        const body = document.body;
+        body.getAttribute('data-theme') === 'light' ? body.removeAttribute('data-theme') : body.setAttribute('data-theme', 'light');
+    }
+
+    function animateSkills() {
+        document.querySelectorAll('.skill-per').forEach(el => {
+            el.style.width = el.getAttribute('data-width');
+        });
+    }
+</script>
 
 </body>
 </html>
