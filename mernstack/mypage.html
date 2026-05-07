@@ -8,29 +8,39 @@
     <style>
         :root {
             --primary: #ff4655; 
-            --primary-glow: rgba(255, 70, 85, 0.5);
-            --bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --text: #f8fafc;
-            --text-dim: #94a3b8;
-            --glass: rgba(255, 255, 255, 0.05);
-            --nav-bg: rgba(15, 23, 42, 0.95);
+            --primary-glow: rgba(255, 70, 85, 0.6);
+            /* Dark Theme Colors */
+            --bg: #0f0c29; 
+            --bg-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --text-dim: #cbd5e1;
+            --glass: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(15, 12, 41, 0.95);
+            --table-text: #ffffff;
+            --hero-color: #ffffff;
         }
 
         [data-theme="light"] {
+            /* Light Theme Colors */
             --bg: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --text: #0f172a;
+            --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            --card-bg: #ffffff;
+            --text: #1e293b;
             --text-dim: #475569;
             --glass: rgba(0, 0, 0, 0.05);
             --nav-bg: rgba(241, 245, 249, 0.95);
+            --table-text: #1e293b;
+            --hero-color: #ff4655;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
+            background: var(--bg);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text);
             margin: 0;
             line-height: 1.6;
@@ -42,7 +52,7 @@
             position: sticky;
             top: 0;
             background: var(--nav-bg);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
             padding: 15px 0;
             z-index: 1000;
             border-bottom: 1px solid var(--glass);
@@ -81,9 +91,9 @@
         .hero-title {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(2.5rem, 8vw, 4rem);
-            color: var(--primary);
+            color: var(--hero-color);
             letter-spacing: 5px;
-            text-shadow: 0 0 25px var(--primary-glow);
+            text-shadow: 0 0 20px var(--primary-glow);
         }
 
         /* --- PROFILE SECTION --- */
@@ -93,10 +103,11 @@
             background: var(--card-bg);
             padding: 50px;
             border-radius: 30px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass);
             flex-wrap: wrap;
             justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .profile-img img {
@@ -104,25 +115,25 @@
             height: 320px;
             object-fit: cover;
             border-radius: 20px;
-            border: 2px solid var(--primary);
+            border: 3px solid var(--primary);
             transition: 0.5s;
         }
 
         .profile-img img:hover {
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: 0 0 30px var(--primary-glow);
+            transform: scale(1.05);
+            box-shadow: 0 0 35px var(--primary-glow);
         }
 
         .about-text ul { list-style: none; padding: 0; }
-        .about-text li { margin-bottom: 10px; font-size: 1.1rem; }
+        .about-text li { margin-bottom: 10px; font-size: 1.1rem; color: var(--text); }
         .about-text b { color: var(--primary); }
 
         /* --- SKILLS --- */
-        .skill-bar { background: var(--glass); height: 10px; border-radius: 10px; margin: 10px 0 20px; overflow: hidden; }
-        .skill-per { background: var(--primary); height: 100%; width: 0; transition: 2s ease-in-out; }
+        .skill-bar { background: rgba(0,0,0,0.1); height: 10px; border-radius: 10px; margin: 10px 0 20px; overflow: hidden; }
+        .skill-per { background: var(--primary); height: 100%; width: 0; transition: 2s ease-in-out; box-shadow: 0 0 10px var(--primary); }
 
         /* --- SOCIAL LINKS --- */
-        .social-links { display: flex; gap: 15px; margin-top: 25px; }
+        .social-links { display: flex; gap: 12px; margin-top: 25px; flex-wrap: wrap; }
         .social-links a {
             color: var(--text);
             text-decoration: none;
@@ -130,27 +141,57 @@
             padding: 10px 20px;
             border-radius: 50px;
             font-weight: bold;
+            background: rgba(255, 70, 85, 0.05);
             transition: 0.4s;
         }
-        .social-links a:hover { background: var(--primary); color: white; box-shadow: 0 0 15px var(--primary-glow); }
+        .social-links a:hover { background: var(--primary); color: white; box-shadow: 0 0 20px var(--primary-glow); }
 
         /* --- EDUCATION TABLE --- */
-        .table-container { overflow-x: auto; border-radius: 15px; background: var(--glass); padding: 20px; margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
+        .table-container { overflow-x: auto; border-radius: 15px; background: var(--card-bg); padding: 20px; margin-top: 20px; border: 1px solid var(--glass); }
+        table { width: 100%; border-collapse: collapse; text-align: left; color: var(--table-text); }
         th, td { padding: 15px; border-bottom: 1px solid var(--glass); }
-        th { color: var(--primary); font-family: 'Orbitron'; }
+        th { color: var(--primary); font-family: 'Orbitron'; text-transform: uppercase; }
 
         /* --- PROJECT GRID --- */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px; }
-        .project-card { background: var(--glass); padding: 30px; border-radius: 20px; border: 1px solid var(--glass); transition: 0.4s; }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); background: var(--card-bg); }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 30px; }
+        .project-card { 
+            background: var(--card-bg); 
+            padding: 35px; 
+            border-radius: 25px; 
+            border: 1px solid var(--glass); 
+            transition: 0.4s; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .project-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--primary); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .project-card p { color: var(--text-dim); }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .project-link:hover { text-decoration: underline; }
 
         /* --- CONTACT --- */
         .contact-box { background: var(--card-bg); padding: 40px; border-radius: 25px; border: 1px solid var(--glass); }
         input, textarea {
-            width: 100%; padding: 15px; margin-bottom: 15px; background: var(--bg);
+            width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.05);
             border: 1px solid var(--glass); color: var(--text); border-radius: 10px; box-sizing: border-box;
         }
+        input::placeholder, textarea::placeholder { color: var(--text-dim); opacity: 0.7; }
 
         @media (max-width: 768px) { .profile-section { flex-direction: column; text-align: center; } .social-links { justify-content: center; } }
     </style>
@@ -176,7 +217,7 @@
             <img src="Profile.jpeg" alt="Ritesh Kumar">
         </div>
         <div class="about-text">
-            <h2 style="font-family: 'Orbitron';">About Me</h2>
+            <h2 style="font-family: 'Orbitron'; color: var(--primary);">About Me</h2>
             <ul>
                 <li><b>NAME:</b> Ritesh Kumar</li>
                 <li><b>AGE:</b> 22 Years</li>
@@ -193,46 +234,95 @@
                 <a href="https://www.instagram.com/ritesh_sharma026/" target="_blank">Instagram</a>
                 <a href="https://www.linkedin.com/in/ritesh-kumar-7623b9282/" target="_blank">LinkedIn</a>
                 <a href="https://github.com/riteshkr26" target="_blank">GitHub</a>
+                <a href="https://youtube.com/@monstergaming7154?si=ryTjD7j9Ct3DUyGh" target="_blank">YouTube</a>
             </div>
         </div>
     </section>
 
     <section id="education">
-        <h2 style="font-family: 'Orbitron'; margin-top: 80px;">Education</h2>
+        <h2 style="font-family: 'Orbitron'; margin-top: 80px; color: var(--primary);">Education</h2>
         <div class="table-container">
             <table>
                 <thead>
-                    <tr><th>Degree</th><th>Institution</th><th>Year</th></tr>
+                    <tr>
+                        <th>Degree</th>
+                        <th>Institution</th>
+                        <th>Year</th>
+                        <th>Percentage/CGPA</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Matriculation</td><td>D.B PUBLIC SCHOOL ARA</td><td>2019</td></tr>
-                    <tr><td>Intermediate</td><td>S.B College Ara</td><td>2021</td></tr>
-                    <tr><td>BCA</td><td>Amity University Patna</td><td>2022-2025</td></tr>
+                    <tr>
+                        <td>Matriculation</td>
+                        <td>D.B PUBLIC SCHOOL ARA</td>
+                        <td>2019</td>
+                        <td>80.1%</td>
+                    </tr>
+                    <tr>
+                        <td>Intermediate</td>
+                        <td>S.B College Ara</td>
+                        <td>2021</td>
+                        <td>79%</td>
+                    </tr>
+                    <tr>
+                        <td>BCA</td>
+                        <td>Amity University Patna</td>
+                        <td>2022-2025</td>
+                        <td>7.87 CGPA</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </section>
 
     <section id="projects">
-        <h2 style="font-family: 'Orbitron'; margin-top: 80px;">Featured Projects</h2>
+        <h2 style="font-family: 'Orbitron'; margin-top: 80px; color: var(--primary);">Featured Projects</h2>
         <div class="project-grid">
+            
             <div class="project-card">
-                <b style="color: var(--primary); font-size: 1.2rem;">Adventure Car Racing</b>
-                <p>Unity Engine high-octane racing experience with advanced physics.</p>
+                <div>
+                    <b style="color: var(--primary); font-size: 1.2rem;">Game Server Hosting UI (Figma)</b>
+                    <p style="margin-top: 10px; font-size: 0.95rem;">
+                        Designed a modern and immersive UI/UX dashboard for high-performance game server management. 
+                        The design focuses on a "gamer-centric" aesthetic with high-contrast elements and intuitive 
+                        navigation for monitoring server statistics.
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--primary);"><b>Tools:</b> Figma, UI/UX Design, Prototyping</p>
+                </div>
+                <a href="https://www.figma.com/design/5rvumSoboDFPUgwadt31zn/NTCC?node-id=0-1&m=dev&t=QTstI8Qrv3Cvx7pf-1" target="_blank" class="project-link">Source: Click Me →</a>
             </div>
+
             <div class="project-card">
-                <b style="color: var(--primary); font-size: 1.2rem;">Game Server UI</b>
-                <p>Sleek dashboard for managing high-performance game servers.</p>
+                <div>
+                    <b style="color: var(--primary); font-size: 1.2rem;">Quiz Application (Spring Boot)</b>
+                    <p style="margin-top: 10px; font-size: 0.95rem;">
+                        Developed a robust full-stack Quiz Application built with Spring Boot to handle complex 
+                        backend logic. Features dynamic question fetching, real-time score calculation, and a 
+                        secure REST API architecture for a seamless user experience.
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--primary);"><b>Tools:</b> Java, Spring Boot, MySQL, REST API</p>
+                </div>
+                <a href="https://github.com/riteshkr26/quiz-app-spring-main" target="_blank" class="project-link">Source: Click Me →</a>
             </div>
+
             <div class="project-card">
-                <b style="color: var(--primary); font-size: 1.2rem;">Speaking Dictionary</b>
-                <p>Android app using Java & XML for pronunciation and definitions.</p>
+                <div>
+                    <b style="color: var(--primary); font-size: 1.2rem;">Speaking Dictionary (Android)</b>
+                    <p style="margin-top: 10px; font-size: 0.95rem;">
+                        Built an interactive Android application that serves as a mobile dictionary with built-in 
+                        voice synthesis. Integrated a Text-to-Speech (TTS) engine using Java and XML to help 
+                        users learn correct word pronunciations easily.
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--primary);"><b>Tools:</b> Java, XML, Android Studio, TTS Engine</p>
+                </div>
+                <a href="https://github.com/riteshkr26/SpeakingDictionary" target="_blank" class="project-link">Source: Click Me →</a>
             </div>
+
         </div>
     </section>
 
     <section id="contact" style="margin-top: 80px;">
-        <h2 style="font-family: 'Orbitron';">Send Your Query</h2>
+        <h2 style="font-family: 'Orbitron'; color: var(--primary);">Send Your Query</h2>
         <div class="contact-box">
             <input type="text" placeholder="Enter your name">
             <input type="email" placeholder="Enter your email">
@@ -251,7 +341,12 @@
 
     function toggleTheme() {
         const body = document.body;
-        body.getAttribute('data-theme') === 'light' ? body.removeAttribute('data-theme') : body.setAttribute('data-theme', 'light');
+        const currentTheme = body.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+            body.removeAttribute('data-theme');
+        } else {
+            body.setAttribute('data-theme', 'light');
+        }
     }
 
     function animateSkills() {
